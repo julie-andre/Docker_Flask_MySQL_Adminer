@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      - database
+  manager:
+    image: "adminer:latest"
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+  database:
+    image: "mysql:5.7"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: julie
+      MYSQL_DATABASE: cloud_pw5
+      
+# restart the service each time the Docker daemon is restarted
+# adminer works on its internal port 8080
+# mysql works on its internal port 3306
+# flask web server default port : 5000
+# NOTE: we named the mysql service as "database" !! (we use it in the py file and as the adminer server value
