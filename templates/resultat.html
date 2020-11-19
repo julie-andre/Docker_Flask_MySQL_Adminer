@@ -1,0 +1,35 @@
+<!doctype html>
+	<html lang="fr">
+		<head>
+			<meta charset="utf-8">
+			<title>Résultat</title>
+		</head>
+		<body>
+			<!-- using Jinja -->
+			<p>Bonjour {{ip}} vous avez posté le messsage : {{post}}, à {{date}}.</p>
+			
+			<table>
+					<tr>
+						<th>Id </th>
+						<th>Post</th>
+						<th>Author Ip </th>
+						<th>Date </th>
+					</tr>
+					
+					{% for post in posts %}
+					<tr>
+						<th>{{post[0]}} </th>
+						<th>{{post[1]}}</th>
+						<th>{{post[2]}} </th>
+						<th>{{post[3]}} </th>
+					</tr>
+					{% endfor %}
+			</table>
+			
+			<p> Submit a new post here </p>
+			<form action="/resultat" method="post">
+					<label>What do you want to say?</label> : <input type="text" name="post" />
+					<input type="submit" value="Envoyer" />
+			</form>
+		</body>
+	</html>
